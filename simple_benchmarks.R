@@ -12,8 +12,6 @@ benchpress <- bench::press(
   rep  = 1:2,
 
   {
-    rows <- 30
-    cols <- 3
     x <- Wenchuan[1:rows, 1:cols]
     bench::mark(
       bgm_nosave = suppressWarnings(bgm(x, display_progress = FALSE, iter = 1e3, save = FALSE)),
@@ -31,3 +29,7 @@ ggplot2::autoplot(benchpress)
 
 # email this as well
 saveRDS(benchpress, "benchpress.rds")
+
+sessionInfo()
+.Machine
+
