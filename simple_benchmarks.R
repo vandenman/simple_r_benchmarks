@@ -3,7 +3,6 @@ library(bgms)
 library(bootnet)
 library(bench)
 
-# set this up
 data("Wenchuan")
 
 benchpress <- bench::press(
@@ -21,7 +20,7 @@ benchpress <- bench::press(
       bgm_save   = suppressWarnings(bgm(x, display_progress = FALSE, iter = 1e3, save = TRUE)),
       bdgraph    = bdgraph(data = x, method = "ggm", iter = 5000, verbose = FALSE, cores = 1),
       bootnet    = suppressWarnings(suppressMessages(estimateNetwork(x, default = "EBICglasso", verbose = FALSE))),
-      check = FALSE # otherwise bench::mark will compare results for equality
+      check = FALSE, # otherwise bench::mark will compare results for equality
       min_iterations = 5,
     )
   }
