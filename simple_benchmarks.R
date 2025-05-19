@@ -5,6 +5,8 @@ library(bench)
 
 data("Wenchuan")
 
+Wenchuan_noNA <- Wenchuan[complete.cases(Wenchuan), ]
+
 benchpress <- bench::press(
 
   rows = c(30, 60),
@@ -12,7 +14,7 @@ benchpress <- bench::press(
   rep  = 1:2,
 
   {
-    x <- Wenchuan[1:rows, 1:cols]
+    x <- Wenchuan_noNA[1:rows, 1:cols]
     bench::mark(
       bgm_nosave = suppressWarnings(bgm(x, display_progress = FALSE, iter = 1e3, save = FALSE)),
       bgm_save   = suppressWarnings(bgm(x, display_progress = FALSE, iter = 1e3, save = TRUE)),
@@ -29,7 +31,3 @@ ggplot2::autoplot(benchpress)
 
 # email this as well
 saveRDS(benchpress, "benchpress.rds")
-
-sessionInfo()
-.Machine
-
